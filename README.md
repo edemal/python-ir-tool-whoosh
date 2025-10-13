@@ -1,6 +1,6 @@
 # Python IR Tool
 
-This project is an information retrieval tool built with [Whoosh](https://whoosh.readthedocs.io/en/latest/). 
+Simple information retrieval tool built with [Whoosh](https://whoosh.readthedocs.io/en/latest/). 
 
 ## Features
 
