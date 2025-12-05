@@ -12,7 +12,7 @@ Simple information retrieval tool built with [Whoosh](https://whoosh.readthedocs
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install whoosh typer[all] nltk
+pip install whoosh "typer[all]" nltk
 python - <<'PY'
 import nltk
 nltk.download('stopwords')
@@ -31,7 +31,10 @@ python -m ir_tool.cli index ./test-collection ./index
 python -m ir_tool.cli query "vide*" --wildcard
 ```
 
-### 
+### Test analyzer
+```bash
+python -m ir_tool.cli test-analyzer "Das ist ein einfacher Testtext zum Analysieren."
+```
 
 ## Documentation
 

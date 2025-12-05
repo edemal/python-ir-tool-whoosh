@@ -11,9 +11,16 @@ class GermanSnowballFilter(Filter):
             t.text = self.stemmer.stem(t.text)
             yield t
 
+def test_analyzer(text: str):
+    analyzer = german_text_analyzer()
+    tokens = [token.text for token in analyzer(text)]
+    print(tokens)
+
 def german_text_analyzer():
     german_stop = set(stopwords.words("german"))
     return (RegexTokenizer() 
             | LowercaseFilter() 
             | StopFilter(german_stop) 
             | GermanSnowballFilter())
+
+
