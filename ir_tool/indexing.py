@@ -12,7 +12,9 @@ def build_index(collection_dir: Path, index_dir: Path) -> None:
 
     writer = ix.writer()
     try:
-        for p in collection_dir.rglob("*.txt"):
+        for p in collection_dir.rglob("*.json"):
+            # TODO: Use JSON schema of covid-19 articles here
+            # https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-03-13/json_schema.txt
             text = p.read_text(encoding="utf-8", errors="ignore")
             writer.update_document(path=str(p.resolve()), contents=text)
     finally:
