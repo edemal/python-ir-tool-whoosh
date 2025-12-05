@@ -3,7 +3,7 @@ from pathlib import Path
 import typer, json
 from .indexing import build_index
 from .searching import search
-from .analyzer import test_analyzer as ta
+from .analyzer import test_analyzer as ta, german_text_analyzer, simple_analyzer
 
 app = typer.Typer()
 
@@ -27,8 +27,12 @@ def query_json(idx: Path = Path("index"), q: str = typer.Argument(...), limit: i
     typer.echo(json.dumps(search(idx, q, limit=limit, wildcard=wildcard), ensure_ascii=False, indent=2))
 
 @app.command()
-def test_analyzer(text: str = typer.Argument(..., help="Text zum Analysieren")):
-    ta(text)
+def test_analyzer(text: str = typer.Argument(..., help="Text zum Analysieren"),
+                  analyzer: str = typer.Option("german", help="Analyzer-Typ: 'german' oder 'simple'")):
+    if analyzer == "german":
+        ta(text, analyzer=german_text_analyzer())
+    else:
+        ta(text, analyzer=simple_analyzer())
 
 if __name__ == "__main__":
     app()

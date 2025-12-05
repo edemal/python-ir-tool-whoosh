@@ -1,5 +1,11 @@
 # ir_tool/analyzer.py
-from whoosh.analysis import RegexTokenizer, LowercaseFilter, StopFilter, Filter
+from whoosh.analysis import (
+    RegexTokenizer,
+    LowercaseFilter,
+    StopFilter,
+    Filter,
+    CompositeAnalyzer,
+)
 from nltk.corpus import stopwords
 from nltk.stem.snowball import GermanStemmer
 
@@ -11,16 +17,18 @@ class GermanSnowballFilter(Filter):
             t.text = self.stemmer.stem(t.text)
             yield t
 
-def test_analyzer(text: str):
-    analyzer = german_text_analyzer()
+def test_analyzer(text: str, analyzer: CompositeAnalyzer):
     tokens = [token.text for token in analyzer(text)]
     print(tokens)
 
 def german_text_analyzer():
-    german_stop = set(stopwords.words("german"))
+    stop = set(stopwords.words("german"))
     return (RegexTokenizer() 
             | LowercaseFilter() 
-            | StopFilter(german_stop) 
+            | StopFilter(stop)
             | GermanSnowballFilter())
 
-
+def simple_analyzer():
+    return (RegexTokenizer()
+            | LowercaseFilter()
+            | StopFilter())
