@@ -80,3 +80,4 @@ dmypy.json
 
 # Whoosh index directory
 index/*
+/noncomm_use_subset/
