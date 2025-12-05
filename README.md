@@ -1,11 +1,10 @@
 # Python IR Tool
 
-Simple information retrieval tool built with [Whoosh](https://whoosh.readthedocs.io/en/latest/). 
+Simple information retrieval tool built with [Whoosh](https://whoosh.readthedocs.io/en/latest/).
 
 ## Features
 
-- Index and search documents 
-- With german text analayzer
+- Index and search json documents like the [COVID-19 Open Research Dataset (CORD-19)](https://github.com/allenai/cord19?tab=readme-ov-file).
 
 ## Installation
 
@@ -19,21 +18,24 @@ nltk.download('stopwords')
 PY
 ```
 
+## Preparing Data
+Download and extract the [COVID-19 Open Research Dataset (CORD-19)](https://github.com/allenai/cord19?tab=readme-ov-file) to a local directory. Use the `noncomm_use_subset` folder for non-commercial use.
+
 ## Usage
 
 ### Build index
 ```bash
-python -m ir_tool.cli index ./test-collection ./index
+python -m ir_tool.cli index ./noncomm_use_subset ./index
 ```
 
 ### Wildcard search 
 ```bash
-python -m ir_tool.cli query "vide*" --wildcard
+python -m ir_tool.cli query "body_text" --wildcard
 ```
 
 ### Test analyzer
 ```bash
-python -m ir_tool.cli test-analyzer "Das ist ein einfacher Testtext zum Analysieren."
+python -m ir_tool.cli test-analyzer "This is a simple test" --analyzer simple
 ```
 
 ## Documentation
